@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Copyright 2014 Adam K Dean
+# https://github.com/Imdsm/docker-scripts/
+
+COUNT=`docker ps | grep $1 | wc -l | bc`
+
+if [ $COUNT -gt 0 ]; then
+  echo "Container found, attaching... press Control-C to detach"
+  docker attach --sig-proxy=false $1
+else
+  echo "Could not find $1. Check container is running."
+fi
