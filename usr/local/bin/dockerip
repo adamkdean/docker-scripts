@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Copyright 2014 Adam K Dean
+# https://github.com/Imdsm/docker-scripts/          
+
+COUNT=`docker ps | grep $1 | wc -l | bc`
+
+if [ $COUNT -gt 0 ]; then
+  IP_ADDRESS=`docker inspect --format '{{ .NetworkSettings.IPAddress }}' $1`
+  echo "$1: $IP_ADDRESS"
+else
+  echo "Could not find $1. Check container is running."
+fi
