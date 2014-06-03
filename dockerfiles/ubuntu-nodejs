@@ -1,0 +1,22 @@
+# DOCKER-VERSION 0.9.1
+FROM ubuntu
+MAINTAINER Adam K Dean
+
+# Update container with dependencies
+RUN apt-get update
+RUN apt-get install -y python-software-properties python g++ make software-properties-common
+
+# Install Node.js
+RUN add-apt-repository ppa:chris-lea/node.js
+RUN apt-get update
+RUN apt-get install -y nodejs
+RUN ln -sf /usr/bin/nodejs /usr/bin/node
+
+# Add source and install packages
+RUN mkdir /var/www
+ADD . /var/www
+RUN cd /var/www; npm install
+
+EXPOSE 80
+
+CMD ["node", "/var/www/src/index.js"]
