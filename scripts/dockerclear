@@ -1,0 +1,2 @@
+# clear all none-running containers
+docker rm $(docker ps -q -a)
