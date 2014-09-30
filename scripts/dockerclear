@@ -1,2 +1,3 @@
-# clear all none-running containers
-docker rm $(docker ps -q -a)
+# clear all none-running containers, hiding errors
+COUNT=$(docker rm $(docker ps -q -a) 2>/dev/null | wc -l | tr -d ' ') 
+echo "Cleared out $COUNT non-running docker containers"
